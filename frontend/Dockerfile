@@ -1,12 +1,14 @@
-FROM node:16-alpine
+FROM node:alpine3.22
 
 ENV BACKEND_URL=http://0.0.0.0:4000
 
-ADD frontend /app
+COPY . .
 
 WORKDIR /app
 
 RUN npm install
+
+EXPOSE 3000
 
 ENTRYPOINT [ "npm" ]
 

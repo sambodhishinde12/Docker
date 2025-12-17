@@ -1,10 +1,10 @@
 FROM python:3.8-slim-buster 
 
-ADD Backend/requirements.txt /app/requirements.txt
+COPY requirements.txt .
 
-RUN pip install -r /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-ADD Backend /app
+COPY . .
 
 WORKDIR /app
 
