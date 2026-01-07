@@ -4,6 +4,8 @@ app = Flask(__name__)
 
 @app.route('/submit', methods=['POST'])
 def submit():
+    data = request.get_json(force=True)
+
     name = request.form.get('name')
     email = request.form.get('email')
 
