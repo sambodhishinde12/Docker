@@ -1,19 +1,19 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-@app.route('/submit', methods=['POST'])
+@app.route("/submit", methods=["POST"])
 def submit():
-    data = request.get_json(force=True)
+    name = request.form.get("name")
+    email = request.form.get("email")
 
-    name = request.form.get('name')
-    email = request.form.get('email')
+    print("Name:", name)
+    print("Email:", email)
 
     return jsonify({
-        "message": "Signup successful",
         "name": name,
         "email": email
     })
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=8080, debug=True)
