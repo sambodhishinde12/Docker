@@ -8,19 +8,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.render("index");
+  res.render("index", { error: null });
 });
 
-app.post("/submit", async (req, res) => {
-    const { name, email } = req.body;
+app.post("/submit", (req, res) => {
+  const { name, email, password } = req.body;
 
-    res.send(`
-        <h2>Submitted Data</h2>
-        <p>Name: ${name}</p>
-        <p>Email: ${email}</p>
-    `);
+  if (!email || !email.includes("@")) {
+    return res.render("index", {
+      error: "Invalid email address"
+    });
+  }
+
+  res.send(`
+    <h2>Signup Successful</h2>
+    <p>Name: ${name}</p>
+    <p>Email: ${email}</p>
+  `);
 });
 
 app.listen(3000, () => {
-    console.log("Frontend running on port 3000");
+  console.log("Frontend running on port 3000");
 });
